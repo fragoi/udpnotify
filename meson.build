@@ -1,6 +1,8 @@
 project('udpnotify', 'cpp',
   version: files('version'))
 
+prefix = get_option('prefix')
+
 headers = [
   'src/arguments.h',
   'src/exceptions.h',
@@ -61,4 +63,4 @@ foreach name, source : manual_tests
     link_args: ['-lpthread'])
 endforeach
 
-#subdir('data' / 'systemd')
+subdir('data' / 'systemd')

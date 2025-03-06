@@ -1,0 +1,12 @@
+[Unit]
+Description=UDP Notify
+
+#Requisite=dbus.service
+#After=dbus.service
+
+[Service]
+Type=exec
+ExecStart=udpnotify
+
+#[Install]
+#WantedBy=graphical-session.target
