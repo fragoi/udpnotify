@@ -15,7 +15,7 @@ class gobject_ptr: public std::shared_ptr<T> {
     }
 
   public:
-    explicit gobject_ptr(T *ptr = NULL) noexcept : B(ptr, deleter) {
+    gobject_ptr(T *ptr = NULL) noexcept : B(ptr, deleter) {
       g_warn_if_fail(ptr == NULL || G_IS_OBJECT(ptr));
     }
 };
@@ -46,7 +46,7 @@ class gshared_ptr: public std::shared_ptr<T> {
     }
 
   public:
-    explicit gshared_ptr(T *ptr = NULL) : B(ptr, deleter) {
+    gshared_ptr(T *ptr = NULL) : B(ptr, deleter) {
     }
 };
 
@@ -60,7 +60,7 @@ class gunique_ptr: public std::unique_ptr<T, typeof(D)> {
     }
 
   public:
-    explicit gunique_ptr(T *ptr = NULL) : B(ptr, deleter) {
+    gunique_ptr(T *ptr = NULL) : B(ptr, deleter) {
     }
 };
 

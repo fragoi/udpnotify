@@ -7,8 +7,10 @@
 void NotificationService::notify(const Message &message) {
   GException error;
 
-  gobject_ptr<GDBusConnection> conn(
-      g_bus_get_sync(G_BUS_TYPE_SESSION, NULL, error.get()));
+  gobject_ptr<GDBusConnection> conn = g_bus_get_sync(
+      G_BUS_TYPE_SESSION,
+      NULL,
+      error.get());
 
   if (error)
     throw error;
