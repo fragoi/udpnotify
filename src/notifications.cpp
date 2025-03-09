@@ -4,7 +4,7 @@
 #include "gexception.h"
 #include "gobjectmm.h"
 
-void NotificationService::notify(const char *msg) {
+void NotificationService::notify(const Message &message) {
   GException error;
 
   gobject_ptr<GDBusConnection> conn(
@@ -20,7 +20,7 @@ void NotificationService::notify(const char *msg) {
       0, /* replaces_id */
       "", /* app_icon */
       "UDP Notification", /* summary */
-      msg, /* body */
+      message.body.c_str(), /* body */
       NULL, /* actions */
       NULL, /* hints */
       0); /* expire_timeout */
