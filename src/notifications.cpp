@@ -4,6 +4,8 @@
 #include "gexception.h"
 #include "gobjectmm.h"
 
+using PUGVariant = gunique_ptr<GVariant, g_variant_unref>;
+
 void NotificationService::notify(const Message &message) {
   GException error;
 
@@ -27,7 +29,7 @@ void NotificationService::notify(const Message &message) {
       NULL, /* hints */
       0); /* expire_timeout */
 
-  g_dbus_connection_call_sync(
+  PUGVariant res = g_dbus_connection_call_sync(
       conn.get(),
       "org.freedesktop.Notifications",
       "/org/freedesktop/Notifications",
