@@ -10,6 +10,7 @@ headers = [
   'src/gobjectmm.h',
   'src/logger.h',
   'src/notifications.h',
+  'src/protocol.h',
   'src/udpserver.h',
 ]
 
@@ -19,6 +20,7 @@ sources = [
   'src/gexception.cpp',
   'src/logger.cpp',
   'src/notifications.cpp',
+  'src/protocol.cpp',
   'src/udpserver.cpp',
 ]
 
@@ -28,6 +30,7 @@ dependencies = [
 
 tests = {
   'arguments_test': 'test/arguments_test.cpp',
+  'protocol_test': 'test/protocol_test.cpp',
   'udpserver_test': 'test/udpserver_test.cpp',
 }
 
