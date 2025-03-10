@@ -22,9 +22,20 @@ static void messageWithBodyAndTitle() {
   NotificationService().notify(message);
 }
 
+static void messageWithBodyAndTitleAndUrgency() {
+  Message message = {
+      .body = "hello",
+      .title = "Important",
+      .urgency = CRITICAL
+  };
+
+  NotificationService().notify(message);
+}
+
 int main() {
   messageWithBody();
   messageWithBodyAndTitle();
+  messageWithBodyAndTitleAndUrgency();
 
   cout << "OK" << endl;
 }

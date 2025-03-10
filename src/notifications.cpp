@@ -7,6 +7,7 @@
 using protocol::Message;
 
 using GVariantUP = gunique_ptr<GVariant, g_variant_unref>;
+using GBuilderUP = gunique_ptr<GVariantBuilder, g_variant_builder_unref>;
 
 static const char* getSummary(const Message &message) {
   return !message.title.empty() ?
@@ -25,6 +26,13 @@ void NotificationService::notify(const Message &message) {
   if (error)
     throw error;
 
+  GBuilderUP hints = g_variant_builder_new(G_VARIANT_TYPE("a{sv}"));
+  g_variant_builder_add(
+      hints.get(),
+      "{sv}",
+      "urgency",
+      g_variant_new_byte(message.urgency));
+
   /* no need to free this as it is "floating" */
   GVariant *parameters = g_variant_new(
       "(susssasa{sv}i)",
@@ -34,7 +42,7 @@ void NotificationService::notify(const Message &message) {
       getSummary(message), /* summary */
       message.body.c_str(), /* body */
       NULL, /* actions */
-      NULL, /* hints */
+      hints.get(), /* hints */
       0); /* expire_timeout */
 
   GVariantUP res = g_dbus_connection_call_sync(
