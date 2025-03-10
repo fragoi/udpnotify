@@ -5,13 +5,26 @@
 using namespace std;
 using namespace protocol;
 
-int main() {
+static void messageWithBody() {
   Message message = {
       .body = "hello"
   };
 
-  NotificationService service;
-  service.notify(message);
+  NotificationService().notify(message);
+}
+
+static void messageWithBodyAndTitle() {
+  Message message = {
+      .body = "hello",
+      .title = "Title"
+  };
+
+  NotificationService().notify(message);
+}
+
+int main() {
+  messageWithBody();
+  messageWithBodyAndTitle();
 
   cout << "OK" << endl;
 }

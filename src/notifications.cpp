@@ -4,7 +4,15 @@
 #include "gexception.h"
 #include "gobjectmm.h"
 
+using protocol::Message;
+
 using PUGVariant = gunique_ptr<GVariant, g_variant_unref>;
+
+static const char* getSummary(const Message &message) {
+  return !message.title.empty() ?
+      message.title.c_str() :
+      "UDP Notification";
+}
 
 void NotificationService::notify(const Message &message) {
   GException error;
@@ -23,7 +31,7 @@ void NotificationService::notify(const Message &message) {
       "udpnotify", /* app_name */
       0, /* replaces_id */
       "", /* app_icon */
-      "UDP Notification", /* summary */
+      getSummary(message), /* summary */
       message.body.c_str(), /* body */
       NULL, /* actions */
       NULL, /* hints */
