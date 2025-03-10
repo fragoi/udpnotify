@@ -6,7 +6,7 @@
 
 using protocol::Message;
 
-using PUGVariant = gunique_ptr<GVariant, g_variant_unref>;
+using GVariantUP = gunique_ptr<GVariant, g_variant_unref>;
 
 static const char* getSummary(const Message &message) {
   return !message.title.empty() ?
@@ -37,7 +37,7 @@ void NotificationService::notify(const Message &message) {
       NULL, /* hints */
       0); /* expire_timeout */
 
-  PUGVariant res = g_dbus_connection_call_sync(
+  GVariantUP res = g_dbus_connection_call_sync(
       conn.get(),
       "org.freedesktop.Notifications",
       "/org/freedesktop/Notifications",
