@@ -2,6 +2,7 @@ project('udpnotify', 'cpp',
   version: files('version'))
 
 prefix = get_option('prefix')
+datadir = prefix / get_option('datadir')
 
 headers = [
   'src/arguments.h',
@@ -67,3 +68,4 @@ foreach name, source : manual_tests
 endforeach
 
 subdir('data' / 'systemd')
+subdir('data' / 'icons')

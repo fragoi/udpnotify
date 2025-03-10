@@ -4,10 +4,16 @@
 #include "gexception.h"
 #include "gobjectmm.h"
 
-using protocol::Message;
+using namespace protocol;
 
 using GVariantUP = gunique_ptr<GVariant, g_variant_unref>;
 using GBuilderUP = gunique_ptr<GVariantBuilder, g_variant_builder_unref>;
+
+static const char* getIcon(const Message &message) {
+  return message.urgency == CRITICAL ?
+      "udpnotify-message-important" :
+      "udpnotify-message";
+}
 
 static const char* getSummary(const Message &message) {
   return !message.title.empty() ?
@@ -38,7 +44,7 @@ void NotificationService::notify(const Message &message) {
       "(susssasa{sv}i)",
       "udpnotify", /* app_name */
       0, /* replaces_id */
-      "", /* app_icon */
+      getIcon(message), /* app_icon */
       getSummary(message), /* summary */
       message.body.c_str(), /* body */
       NULL, /* actions */
