@@ -13,7 +13,7 @@ static int parseInt(char *arg, argp_state *state) {
   char *end;
   int i = strtol(arg, &end, 10);
   if (*end) {
-    argp_error(state, "Error parsing number %s", arg);
+    argp_error(state, "error parsing number: %s", arg);
     throw invalid_argument(arg);
   }
   return i;
