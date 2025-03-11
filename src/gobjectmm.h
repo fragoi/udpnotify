@@ -20,22 +20,6 @@ class gobject_ptr: public std::shared_ptr<T> {
     }
 };
 
-template<typename T, typename D = void (*)(T*)>
-class gboxed_ptr: public std::unique_ptr<T, D> {
-    using B = std::unique_ptr<T, D>;
-
-    static const D& ensureDeleter(const D &deleter) {
-      if (!deleter)
-        throw std::invalid_argument("Free function is required");
-      return deleter;
-    }
-
-  public:
-    gboxed_ptr(T *ptr, const D &deleter) :
-        B(ptr, ensureDeleter(deleter)) {
-    }
-};
-
 template<typename T, void (*D)(T*)>
 class gshared_ptr: public std::shared_ptr<T> {
     using B = std::shared_ptr<T>;
