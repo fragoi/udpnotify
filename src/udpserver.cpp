@@ -32,7 +32,12 @@ UdpServer::UdpServer(int port, Callback cb) :
     port(port),
     cb(cb) {
   fd = createSocket();
-  bindPort(fd, port);
+  try {
+    bindPort(fd, port);
+  } catch (...) {
+    close(fd);
+    throw;
+  }
   LOGGER_INFO(logger) << "Listening on port: " << port << std::endl;
 }
 
