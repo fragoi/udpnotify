@@ -52,7 +52,7 @@ UdpServer::~UdpServer() {
 void UdpServer::run() {
   int nread;
   char buffer[BUFFER_LENGTH + 1];
-  while ((nread = recv(fd, buffer, BUFFER_LENGTH, 0)) > 0) {
+  while ((nread = recv(fd, buffer, BUFFER_LENGTH, 0)) >= 0) {
     buffer[nread] = '\0';
     cb(buffer);
   }
