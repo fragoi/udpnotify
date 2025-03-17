@@ -31,6 +31,7 @@ dependencies = [
 
 tests = {
   'arguments_test': 'test/arguments_test.cpp',
+  'logger_test': 'test/logger_test.cpp',
   'protocol_test': 'test/protocol_test.cpp',
   'udpserver_test': 'test/udpserver_test.cpp',
 }
