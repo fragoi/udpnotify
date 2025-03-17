@@ -2,6 +2,7 @@
 #define LOGGER_H_
 
 #include <iostream>
+#include <string>
 
 #define LOGGER(_logger)         _logger && _logger
 #define LOGGER_DEBUG(_logger)   _logger.isDebug() && _logger.debug()
@@ -11,6 +12,7 @@
 
 class Logger {
     using ostream = std::ostream;
+    using string = std::string;
 
   public:
     static ostream *out;
@@ -25,15 +27,15 @@ class Logger {
     };
 
   private:
-    const char *prefix;
+    string prefix;
     Level level;
 
     ostream& _prefix(ostream &out, const char *sep = " ") const {
-      return prefix ? out << prefix << sep : out;
+      return !prefix.empty() ? out << prefix << sep : out;
     }
 
   public:
-    Logger(const char *prefix = nullptr, Level level = DEFAULT) :
+    Logger(const string &prefix = string(), Level level = DEFAULT) :
         prefix(prefix), level(level) {
     }
 
