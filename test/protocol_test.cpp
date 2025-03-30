@@ -5,7 +5,7 @@
 #include "src/parsenotify.h"
 
 using namespace std;
-using namespace protocol;
+using namespace notifications;
 
 static void bodyOnly() {
   Message message = parseMessage("hello");

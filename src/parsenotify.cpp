@@ -3,7 +3,7 @@
 #include "parsenotify.h"
 
 using namespace std;
-using namespace protocol;
+using namespace notifications;
 
 static Urgency parseUrgency(const string &s) {
   if (s == "low") {
@@ -19,7 +19,7 @@ static string parseTitle(const string &s) {
   return s.empty() ? s : s.substr(1, s.length() - 2);
 }
 
-Message protocol::parseMessage(const string &msg) {
+Message notifications::parseMessage(const string &msg) {
   regex re("^([[:alpha:]]+)?([(].+[)])?: ");
   smatch m;
   Message message;

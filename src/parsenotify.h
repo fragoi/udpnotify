@@ -3,9 +3,7 @@
 
 #include "notifications.h"
 
-namespace protocol {
-
-  using namespace notifications;
+namespace notifications {
 
   Message parseMessage(const string&);
 

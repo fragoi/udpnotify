@@ -3,7 +3,7 @@
 #include "udpserver.h"
 #include "parsenotify.h"
 
-using namespace protocol;
+using namespace notifications;
 
 int main(int argc, char **argv) {
   Arguments arguments = parseArgs(argc, argv);
