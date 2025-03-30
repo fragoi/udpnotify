@@ -1,23 +1,11 @@
 #ifndef PROTOCOL_H_
 #define PROTOCOL_H_
 
-#include <string>
+#include "notifications.h"
 
 namespace protocol {
 
-  using std::string;
-
-  enum Urgency {
-    LOW,
-    NORMAL,
-    CRITICAL
-  };
-
-  struct Message {
-      string body;
-      string title;
-      Urgency urgency = NORMAL;
-  };
+  using namespace notifications;
 
   Message parseMessage(const string&);
 

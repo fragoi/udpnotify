@@ -4,7 +4,7 @@
 #include "gexception.h"
 #include "gobjectmm.h"
 
-using namespace protocol;
+using namespace notifications;
 
 using GVariantUP = gunique_ptr<GVariant, g_variant_unref>;
 using GBuilderUP = gunique_ptr<GVariantBuilder, g_variant_builder_unref>;

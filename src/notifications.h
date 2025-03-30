@@ -1,13 +1,28 @@
 #ifndef NOTIFICATIONS_H_
 #define NOTIFICATIONS_H_
 
-#include "protocol.h"
+#include <string>
 
-class NotificationService {
-    using Message = protocol::Message;
+namespace notifications {
 
-  public:
-    void notify(const Message&);
-};
+  using std::string;
+
+  enum Urgency {
+    LOW,
+    NORMAL,
+    CRITICAL
+  };
+
+  struct Message {
+      string body;
+      string title;
+      Urgency urgency = NORMAL;
+  };
+
+  struct NotificationService {
+      void notify(const Message&);
+  };
+
+}
 
 #endif /* NOTIFICATIONS_H_ */
