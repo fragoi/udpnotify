@@ -32,7 +32,7 @@ dependencies = [
 tests = {
   'arguments_test': 'test/arguments_test.cpp',
   'logger_test': 'test/logger_test.cpp',
-  'protocol_test': 'test/protocol_test.cpp',
+  'parsenotify_test': 'test/parsenotify_test.cpp',
 }
 
 manual_tests = {
