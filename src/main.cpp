@@ -1,7 +1,7 @@
 #include "arguments.h"
 #include "notifications.h"
 #include "udpserver.h"
-#include "protocol.h"
+#include "parsenotify.h"
 
 using namespace protocol;
 

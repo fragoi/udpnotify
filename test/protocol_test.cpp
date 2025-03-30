@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "src/protocol.h"
+#include "src/parsenotify.h"
 
 using namespace std;
 using namespace protocol;

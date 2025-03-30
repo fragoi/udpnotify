@@ -1,5 +1,5 @@
-#ifndef PROTOCOL_H_
-#define PROTOCOL_H_
+#ifndef PARSENOTIFY_H_
+#define PARSENOTIFY_H_
 
 #include "notifications.h"
 
@@ -11,4 +11,4 @@ namespace protocol {
 
 }
 
-#endif /* PROTOCOL_H_ */
+#endif /* PARSENOTIFY_H_ */

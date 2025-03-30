@@ -11,7 +11,7 @@ headers = [
   'src/gobjectmm.h',
   'src/logger.h',
   'src/notifications.h',
-  'src/protocol.h',
+  'src/parsenotify.h',
   'src/udpserver.h',
 ]
 
@@ -21,7 +21,7 @@ sources = [
   'src/gexception.cpp',
   'src/logger.cpp',
   'src/notifications.cpp',
-  'src/protocol.cpp',
+  'src/parsenotify.cpp',
   'src/udpserver.cpp',
 ]
 
