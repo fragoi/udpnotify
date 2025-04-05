@@ -54,7 +54,12 @@ void UdpServer::run() {
   char buffer[BUFFER_LENGTH + 1];
   while ((nread = recv(fd, buffer, BUFFER_LENGTH, 0)) >= 0) {
     buffer[nread] = '\0';
-    cb(buffer);
+    try {
+      cb(buffer);
+    } catch (const std::exception &e) {
+      LOGGER_ERROR(logger) << "Error invoking callback: " << e.what()
+          << std::endl;
+    }
   }
   if (nread < 0) {
     throw ErrnoException("Error reading from socket");
