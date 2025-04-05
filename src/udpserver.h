@@ -15,6 +15,7 @@ class UdpServer {
 
   public:
     UdpServer(int port, Callback cb);
+    UdpServer(const UdpServer&) = delete;
     ~UdpServer();
 
     void run();
