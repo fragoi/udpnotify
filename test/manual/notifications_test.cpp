@@ -16,7 +16,7 @@ static void messageWithBody() {
 static void messageWithBodyAndTitle() {
   Message message = {
       .body = "hello",
-      .title = "Title"
+      .summary = "Title"
   };
 
   NotificationService().notify(message);
@@ -25,7 +25,7 @@ static void messageWithBodyAndTitle() {
 static void messageWithBodyAndTitleAndUrgency() {
   Message message = {
       .body = "hello",
-      .title = "Important",
+      .summary = "Important",
       .urgency = CRITICAL
   };
 

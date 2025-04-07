@@ -15,7 +15,7 @@ namespace notifications {
 
   struct Message {
       string body;
-      string title;
+      string summary;
       Urgency urgency = NORMAL;
   };
 

@@ -16,8 +16,8 @@ static const char* getIcon(const Message &message) {
 }
 
 static const char* getSummary(const Message &message) {
-  return !message.title.empty() ?
-      message.title.c_str() :
+  return !message.summary.empty() ?
+      message.summary.c_str() :
       "UDP Notification";
 }
 
