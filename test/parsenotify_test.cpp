@@ -14,10 +14,10 @@ static void bodyOnly() {
   assert(message.urgency == NORMAL);
 }
 
-static void titleAndBody() {
-  Message message = parseMessage("(title): hello");
+static void summaryAndBody() {
+  Message message = parseMessage("(summary): hello");
   assert(message.body == "hello");
-  assert(message.summary == "title");
+  assert(message.summary == "summary");
   assert(message.urgency == NORMAL);
 }
 
@@ -28,34 +28,34 @@ static void lowUrgencyAndBody() {
   assert(message.urgency == LOW);
 }
 
-static void lowUrgencyAndTitleAndBody() {
-  Message message = parseMessage("low(title): hello");
+static void lowUrgencyAndSummaryAndBody() {
+  Message message = parseMessage("low(summary): hello");
   assert(message.body == "hello");
-  assert(message.summary == "title");
+  assert(message.summary == "summary");
   assert(message.urgency == LOW);
 }
 
-static void normalUrgencyAndTitleAndBody() {
-  Message message = parseMessage("normal(A nice title): hello world");
+static void normalUrgencyAndSummaryAndBody() {
+  Message message = parseMessage("normal(A nice summary): hello world");
   assert(message.body == "hello world");
-  assert(message.summary == "A nice title");
+  assert(message.summary == "A nice summary");
   assert(message.urgency == NORMAL);
 }
 
-static void criticalUrgencyAndTitleAndBody() {
-  Message message = parseMessage("critical(A nice title): hello world");
+static void criticalUrgencyAndSummaryAndBody() {
+  Message message = parseMessage("critical(A nice summary): hello world");
   assert(message.body == "hello world");
-  assert(message.summary == "A nice title");
+  assert(message.summary == "A nice summary");
   assert(message.urgency == CRITICAL);
 }
 
 int main() {
   bodyOnly();
-  titleAndBody();
+  summaryAndBody();
   lowUrgencyAndBody();
-  lowUrgencyAndTitleAndBody();
-  normalUrgencyAndTitleAndBody();
-  criticalUrgencyAndTitleAndBody();
+  lowUrgencyAndSummaryAndBody();
+  normalUrgencyAndSummaryAndBody();
+  criticalUrgencyAndSummaryAndBody();
 
   cout << "OK" << endl;
 }

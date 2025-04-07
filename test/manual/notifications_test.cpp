@@ -13,16 +13,16 @@ static void messageWithBody() {
   NotificationService().notify(message);
 }
 
-static void messageWithBodyAndTitle() {
+static void messageWithBodyAndSummary() {
   Message message = {
       .body = "hello",
-      .summary = "Title"
+      .summary = "Summary"
   };
 
   NotificationService().notify(message);
 }
 
-static void messageWithBodyAndTitleAndUrgency() {
+static void messageWithBodyAndSummaryAndUrgency() {
   Message message = {
       .body = "hello",
       .summary = "Important",
@@ -34,8 +34,8 @@ static void messageWithBodyAndTitleAndUrgency() {
 
 int main() {
   messageWithBody();
-  messageWithBodyAndTitle();
-  messageWithBodyAndTitleAndUrgency();
+  messageWithBodyAndSummary();
+  messageWithBodyAndSummaryAndUrgency();
 
   cout << "OK" << endl;
 }
