@@ -1,9 +1,12 @@
 #include <regex>
 
 #include "parsenotify.h"
+#include "logger.h"
 
 using namespace std;
 using namespace notifications;
+
+static const Logger notifyLogger("[Notify]");
 
 static Urgency parseUrgency(const string &s) {
   if (s == "low") {
@@ -33,4 +36,13 @@ Message notifications::parseMessage(const string &msg) {
   }
 
   return message;
+}
+
+void Notify::operator()(const char *msg) {
+  try {
+    Message message = parseMessage(msg);
+    service.notify(message);
+  } catch (const exception &e) {
+    LOGGER_ERROR(notifyLogger) << e.what() << endl;
+  }
 }

@@ -7,6 +7,13 @@ namespace notifications {
 
   Message parseMessage(const string&);
 
+  class Notify {
+      NotificationService service;
+
+    public:
+      void operator()(const char*);
+  };
+
 }
 
 #endif /* PARSENOTIFY_H_ */
