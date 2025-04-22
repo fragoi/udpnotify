@@ -20,8 +20,8 @@ static int createSocket() {
 
 static void bindPort(int fd, int port) {
   sockaddr_in bindAddr;
-  bindAddr.sin_addr.s_addr = INADDR_ANY;
   bindAddr.sin_family = AF_INET;
+  bindAddr.sin_addr.s_addr = INADDR_ANY;
   bindAddr.sin_port = htons(port);
   if (bind(fd, (sockaddr*) &bindAddr, sizeof(bindAddr)) < 0) {
     throw ErrnoException("Error binding socket");
