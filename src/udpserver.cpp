@@ -1,5 +1,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <unistd.h>
 
 #include "udpserver.h"
@@ -8,7 +9,7 @@
 
 #define BUFFER_LENGTH 512
 
-static const Logger logger("[UdpServer]");
+static const Logger logger("[UdpServer]", Logger::DEBUG);
 
 static int createSocket() {
   int fd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -52,7 +53,20 @@ UdpServer::~UdpServer() {
 void UdpServer::run() {
   int nread;
   char buffer[BUFFER_LENGTH + 1];
-  while ((nread = recv(fd, buffer, BUFFER_LENGTH, 0)) >= 0) {
+  sockaddr_in clientAddr;
+  socklen_t clientAddrLen = sizeof(clientAddr);
+  while ((nread = recvfrom(
+      fd,
+      buffer,
+      BUFFER_LENGTH,
+      0,
+      (sockaddr*) &clientAddr,
+      &clientAddrLen)) >= 0) {
+
+    LOGGER_DEBUG(logger) << "Received message from: "
+        << inet_ntoa(clientAddr.sin_addr)
+        << std::endl;
+
     buffer[nread] = '\0';
     try {
       cb(buffer);
