@@ -53,18 +53,17 @@ UdpServer::~UdpServer() {
 void UdpServer::run() {
   int nread;
   char buffer[BUFFER_LENGTH + 1];
-  sockaddr_in clientAddr;
-  socklen_t clientAddrLen = sizeof(clientAddr);
-  while ((nread = recvfrom(
-      fd,
-      buffer,
-      BUFFER_LENGTH,
-      0,
-      (sockaddr*) &clientAddr,
-      &clientAddrLen)) >= 0) {
+  sockaddr_in from;
+  socklen_t fromLen;
+  while (true) {
+    fromLen = sizeof(from);
+    nread = recvfrom(fd, buffer, BUFFER_LENGTH, 0, (sockaddr*) &from, &fromLen);
+    if (nread < 0) {
+      throw ErrnoException("Error reading from socket");
+    }
 
     LOGGER_DEBUG(logger) << "Received message from: "
-        << inet_ntoa(clientAddr.sin_addr)
+        << inet_ntoa(from.sin_addr)
         << std::endl;
 
     buffer[nread] = '\0';
@@ -74,8 +73,5 @@ void UdpServer::run() {
       LOGGER_ERROR(logger) << "Error invoking callback: " << e.what()
           << std::endl;
     }
-  }
-  if (nread < 0) {
-    throw ErrnoException("Error reading from socket");
   }
 }
