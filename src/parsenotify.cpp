@@ -38,16 +38,20 @@ Message notifications::parseMessage(const string &msg) {
   return message;
 }
 
+static string prepend(const string &s, const string &v) {
+  if (s.empty()) {
+    return v;
+  }
+  if (v.empty()) {
+    return s;
+  }
+  return v + ": " + s;
+}
+
 void Notify::operator()(const char *msg, const char *from) {
   try {
     Message message = parseMessage(msg);
-    if (from) {
-      if (message.summary.empty()) {
-        message.summary = from;
-      } else {
-        message.summary = string(from) + ": " + message.summary;
-      }
-    }
+    message.summary = prepend(message.summary, from);
     service.notify(message);
   } catch (const exception &e) {
     LOGGER_ERROR(notifyLogger) << e.what() << endl;
