@@ -41,6 +41,13 @@ Message notifications::parseMessage(const string &msg) {
 void Notify::operator()(const char *msg, const char *from) {
   try {
     Message message = parseMessage(msg);
+    if (from) {
+      if (message.summary.empty()) {
+        message.summary = from;
+      } else {
+        message.summary = string(from) + ": " + message.summary;
+      }
+    }
     service.notify(message);
   } catch (const exception &e) {
     LOGGER_ERROR(notifyLogger) << e.what() << endl;
