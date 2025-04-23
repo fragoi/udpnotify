@@ -37,6 +37,7 @@ tests = {
 
 manual_tests = {
   'notifications_test': 'test/manual/notifications_test.cpp',
+  'notify_test': 'test/manual/notify_test.cpp',
   'udpserver_test': 'test/manual/udpserver_test.cpp',
 }
 
