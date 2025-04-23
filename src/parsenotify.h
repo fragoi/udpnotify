@@ -11,7 +11,7 @@ namespace notifications {
       NotificationService service;
 
     public:
-      void operator()(const char*);
+      void operator()(const char*, const char*);
   };
 
 }

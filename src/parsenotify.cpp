@@ -38,7 +38,7 @@ Message notifications::parseMessage(const string &msg) {
   return message;
 }
 
-void Notify::operator()(const char *msg) {
+void Notify::operator()(const char *msg, const char *from) {
   try {
     Message message = parseMessage(msg);
     service.notify(message);

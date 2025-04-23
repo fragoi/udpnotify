@@ -6,7 +6,7 @@
 class UdpServer {
     friend class UdpServerPrivate;
 
-    using Callback = std::function<void(const char *)>;
+    using Callback = std::function<void(const char*, const char*)>;
 
     int port;
     Callback cb;

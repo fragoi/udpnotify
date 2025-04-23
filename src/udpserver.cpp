@@ -9,7 +9,7 @@
 
 #define BUFFER_LENGTH 512
 
-static const Logger logger("[UdpServer]", Logger::DEBUG);
+static const Logger logger("[UdpServer]");
 
 static int createSocket() {
   int fd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -55,6 +55,7 @@ void UdpServer::run() {
   char buffer[BUFFER_LENGTH + 1];
   sockaddr_in from;
   socklen_t fromLen;
+  const char *fromStr;
   while (true) {
     fromLen = sizeof(from);
     nread = recvfrom(fd, buffer, BUFFER_LENGTH, 0, (sockaddr*) &from, &fromLen);
@@ -62,13 +63,16 @@ void UdpServer::run() {
       throw ErrnoException("Error reading from socket");
     }
 
-    LOGGER_DEBUG(logger) << "Received message from: "
-        << inet_ntoa(from.sin_addr)
-        << std::endl;
-
     buffer[nread] = '\0';
+
+    if (fromLen > 0) {
+      fromStr = inet_ntoa(from.sin_addr);
+    } else {
+      fromStr = "";
+    }
+
     try {
-      cb(buffer);
+      cb(buffer, fromStr);
     } catch (const std::exception &e) {
       LOGGER_ERROR(logger) << "Error invoking callback: " << e.what()
           << std::endl;
