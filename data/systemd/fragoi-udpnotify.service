@@ -1,6 +1,8 @@
 [Unit]
 Description=UDP Notify
 
+PartOf=graphical-session.target
+
 [Service]
 Type=exec
 ExecStart=udpnotify
